@@ -1,0 +1,7 @@
+{
+  "name": "discord-bot-message-removal",
+  "version": "1.0.0",
+  "dependencies": {
+    "discord.js": "latest"
+  }
+}
