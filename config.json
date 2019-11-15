@@ -1,14 +1,16 @@
 {
-  "token": "NjQ0NDY1OTU2NzI2MjQzMzMw.Xc0buQ.GnRTEtvGUvYVqVkF_exvKFqZV4U",
-  "botChannelID": "593065252078485516",
+  "token": "",
+  "botChannelID": "",
   "bots": [
     {
-      "id": "644465956726243330",
+      "name": "",
+      "id": "",
       "prefix": "!"
     },
     {
-      "id": "159985870458322944",
-      "prefix": "!"
+      "name": "",
+      "id": "",
+      "prefix": ","
     }
   ]
 }
