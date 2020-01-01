@@ -37,39 +37,6 @@ function getMemberFromID(arr, id) {
     return arr.filter(arrElement => arrElement.id === id)[0];
 }
 
-client.on('ready', () => {
-    client.guilds.forEach((guild) => {
-        setInterval(() => {
-            guild.fetchInvites()
-                .then((invites) => {
-                    invites.forEach((invite) => {
-                        fs.readFile("./invites.csv", {encoding: 'utf-8'}, (err, data) => {
-                            if (err) {
-                                let member = new Member(invite.inviter.id, invite.inviter.username, guild.id, guild.name, invite.uses);
-
-                                fs.writeFile('./invites.csv', `${member.serverID}:${member.server};`)
-                            }
-
-                            let members = getMembersFromString(data);
-                            console.log(members);
-                            getMemberFromID(members, invite.inviter.id).addInvites(invite.uses);
-                            let outPutString = "";
-
-                            members.forEach((member) => {
-                                outPutString += `${member.serverID}:${member.server};${member.id}:${member.name};${member.invitedPeopleCount} \n`;
-                            })
-                        });
-
-
-                        if (invite.expiresAt - new Date() === 10) {
-
-                        }
-                    })
-                })
-        },500 /*8.64*10**7*/);
-    });
-});
-
 function isCommandPrefix(prefix) {
     for (let index in Config.bots) {
         if (Config.bots[index].prefix == prefix) {
