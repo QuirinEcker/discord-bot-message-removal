@@ -1,7 +1,7 @@
 const fs = require('fs');
 const Member = require('./Member');
 const Discord = require('discord.js');
-const Config = require('./config.json');
+const Config = require('./config/config.json');
 const client = new Discord.Client();
 
 client.login(Config.token)
