@@ -91,13 +91,15 @@ function messageIsFromBot(id) {
 }
 
 function messageIsCommand(prefix) {
-    let bool = false;
+    let matchingPrefixCount = 0;
 
     Config.bots.forEach((bot) => {
-        bool = bot.prefix === prefix;
+        if (bot.prefix === prefix) {
+            matchingPrefixCount++;
+        }
     });
 
-    return bool;
+    return matchingPrefixCount > 0;
 }
 
 function getID(memberIDString) {
