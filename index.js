@@ -1,12 +1,12 @@
 const fs = require('fs');
 const Member = require('./Member');
 const Discord = require('discord.js');
-const Config = require('./config');
+const Config = require('./config.json');
 const client = new Discord.Client();
 
 client.login(Config.token)
-.catch(() => {
-    console.log('login failed');
+.catch(exception => {
+    console.log(exception.message);
 });
 
 function getMembersFromString(data) {
