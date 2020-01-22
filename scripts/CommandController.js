@@ -1,4 +1,10 @@
+const Command = require("./Command");
+
 class CommandController {
+
+    convertToCommand(commandString) {
+        return new Command(commandString);
+    }
 
     runCommand(command) {
 
