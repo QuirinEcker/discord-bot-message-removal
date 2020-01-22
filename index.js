@@ -1,12 +1,11 @@
 const BotMessageFilter = require('./BotMessageFilter');
 const fs = require('fs');
-const Discord = require('discord.js');
-const client = new Discord.Client();
 const auth = require("./config/config")
+const api = require("./ApiProvider");
 
-client.login(auth.token)
+api.client.login(auth.token)
     .catch(console.log)
 
-client.on('message', (msg) => {
+api.client.on('message', (msg) => {
     BotMessageFilter.instance.filter(msg)
 });
