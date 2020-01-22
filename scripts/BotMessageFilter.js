@@ -51,6 +51,6 @@ class BotMessageFilter {
     }
 }
 
-BotMessageFilter.instance = new BotMessageFilter(require('./config/filterConf'));
+BotMessageFilter.instance = new BotMessageFilter(require('../config/filterConf'));
 
 module.exports = BotMessageFilter;
