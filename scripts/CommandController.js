@@ -9,13 +9,6 @@ class CommandController {
                 msg.channel.send(parameter[0]);
             }
         }
-
-        this.healing = {
-            parameter: 0,
-            command: (msg, parameter) => {
-                msg.channel.send("i need healing");
-            }
-        }
     }
 
     convertToCommand(msg, commandString) {
