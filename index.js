@@ -3,6 +3,8 @@ const Member = require('./Member');
 const Discord = require('discord.js');
 const Config = require('./config/config.json');
 const client = new Discord.Client();
+const mc2020Name = "binPot";
+const mc2020NameLang = "binaryPotato";
 
 client.login(Config.token)
 .catch(exception => {
@@ -95,6 +97,15 @@ client.on('message', (msg) => {
                     }, 5000)
                 })
                 .catch(message => console.log(message));
+        }
+    } else {
+        console.log(".")
+        if (msg.content.split(" ")[1] === "§signBinaryPotato") {
+            let dataToAppend = `${msg.author.id};${msg.content.split(" ")[1]} \n`
+            fs.appendFile(`${mc2020Name}.csv`, dataToAppend, (err) => {
+                if (err) throw err;
+                console.log("saved")
+            })
         }
     }
 });

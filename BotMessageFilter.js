@@ -1,0 +1,5 @@
+class BotMessageFilter {
+
+    constructor(config) {
+    }
+}
