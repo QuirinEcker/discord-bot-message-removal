@@ -1,12 +1,14 @@
+const BotMessageFilter = require('./BotMessageFilter');
 const fs = require('fs');
 const Member = require('./Member');
 const Discord = require('discord.js');
-const Config = require('./config/config.json');
+const AuthConfig = require('./config/config.json');
+const Config = require('./config/filterConf');
 const client = new Discord.Client();
 const mc2020Name = "binPot";
 const mc2020NameLang = "binaryPotato";
 
-client.login(Config.token)
+client.login(AuthConfig.token)
 .catch(exception => {
     console.log(exception.message);
 });
