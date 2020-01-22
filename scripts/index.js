@@ -16,7 +16,9 @@ api.client.on('message', (msg) => {
     BotMessageFilter.instance.filter(msg)
 
     try {
-        let command = commandController.convertToCommand(msg.content)
+        let command = commandController.convertToCommand(msg, msg.content)
+        commandController.validate(command);
+        command.run()
     } catch (e) {
         console.log(e);
     }
