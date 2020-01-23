@@ -4,9 +4,18 @@ class CommandController {
 
     constructor() {
         this.echo = {
-            parameter: 1,
+            parameter: {
+                min: 1,
+                max: 'n'
+            },
             command: (msg, parameter) => {
-                msg.channel.send(parameter[0]);
+                let text = "";
+
+                parameter.forEach(parameter => {
+                    text += parameter + " ";
+                });
+
+                msg.channel.send(text);
             }
         }
     }
@@ -17,7 +26,16 @@ class CommandController {
 
     validate(command) {
         try {
-            if (this[command.baseCommand].parameter === command.parameter.length) {
+            if (
+                this[command.baseCommand].parameter.max === 'n' &&
+                command.parameter.length >= this[command.baseCommand].parameter.min
+            ) {
+                command.commandFunc = this[command.baseCommand].command;
+                command.valid = true;
+            }else if (
+                command.parameter.length >= this[command.baseCommand].parameter.min &&
+                command.parameter.length <= this[command.baseCommand].parameter.max
+            ) {
                 command.commandFunc = this[command.baseCommand].command;
                 command.valid = true;
             } else {
