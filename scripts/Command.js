@@ -8,11 +8,9 @@ class Command {
                 this.valid = false;
                 this.commandFunc = null;
                 this.msg = msg;
-            } else {
-                throw "missing prefix"
-            }
+            } else throw Error();
         } else {
-            throw "constructor only accepts String"
+            throw Error("constructor only accepts String");
         }
     }
 
