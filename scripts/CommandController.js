@@ -45,7 +45,7 @@ class CommandController {
                 invalidParameters = true;
             }
         } catch (e) {
-            throw new CommandException("Unknown Command")
+            command.valid = false;
         }
 
         if (invalidParameters) {

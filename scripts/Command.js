@@ -1,3 +1,6 @@
+const filterconf = require("../config/filterConf");
+const CommandException = require("./CommandException");
+
 class Command {
     constructor(msg, stringCommand) {
         if (typeof stringCommand === "string") {
@@ -19,10 +22,18 @@ class Command {
     }
 
     run() {
-        if (this.valid === true) {
+        if (this.valid === true && this.permissionToRun()) {
             this.commandFunc(this.msg, this.parameter);
         } else {
-            throw "command is not valid"
+            throw new CommandException("command is not valid or in the wrong channel");
+        }
+    }
+
+    permissionToRun() {
+        if (this.msg.channel.id === filterconf.botChannelID) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

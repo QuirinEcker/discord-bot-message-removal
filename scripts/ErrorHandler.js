@@ -2,11 +2,23 @@ class ErrorHandler {
 
     constructor() {
         this.TypeError = (err, msg, cmd) => {
-            msg.channel.send(`Unknown command ${cmd.baseCommand}`);
+            msg.channel.send(`Unknown command ${cmd.baseCommand}`)
+                .then(message => {
+                    setTimeout(() => {
+                        message.delete()
+                            .catch(console.log)
+                    }, 10000)
+                })
         }
 
         this.CommandException = (err, msg, cmd) => {
-            msg.channel.send(err.message);
+            msg.channel.send(err.message)
+                .then(message => {
+                    setTimeout(() => {
+                        message.delete()
+                            .catch(console.log)
+                    }, 10000)
+                })
         }
 
         this.Error = (err, msg, cmd) => {
