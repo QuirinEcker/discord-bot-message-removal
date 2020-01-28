@@ -19,6 +19,16 @@ class CommandController {
                 msg.channel.send(text);
             }
         }
+
+        this.binaryPotato = {
+            parameter: {
+                min: 1,
+                max: 1
+            },
+            command: (msg, parameter) => {
+
+            }
+        }
     }
 
     convertToCommand(msg, commandString) {
