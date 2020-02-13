@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: pwdb
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+    - 2020:2020
+
+  nodemon:
+    image: quirinecker/discord-node-bot:latest
+    restart: always
+    volumes:
+      - ./:/usr/src/app/
