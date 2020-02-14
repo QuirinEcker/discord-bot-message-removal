@@ -1,5 +1,6 @@
 const Command = require("./Command");
-const CommandException = require("./CommandException")
+const CommandException = require("./CommandException");
+const DataBase = require("./DataBase");
 
 class CommandController {
 
@@ -26,7 +27,11 @@ class CommandController {
                 max: 1
             },
             command: (msg, parameter) => {
-
+                DataBase.instance.doSQL("CREATE TABLE bpMember (" +
+                    "discord_id VARCHAR(20)," +
+                    "whitelist_name VARCHAR(20)," +
+                    "CONSTRAINT PK_bpMember PRIMARY KEY (discord_id)" +
+                    ")")
             }
         }
     }
