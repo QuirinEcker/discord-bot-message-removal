@@ -6,9 +6,21 @@ class DataBase {
         this.host = host;
         this.user = user;
         this.password = password;
+        this.con = mysql.createConnection({
+            host: host,
+            user: user,
+            password: password
+        })
     }
 
-    createTable(tableName) {
-
+    doSQL(sql) {
+        this.con.connect(() => {
+            this.con.query(sql, err => {
+                if (err) console.error(err);
+            })
+        })
     }
 }
+
+DataBase.instance = new DataBase("localhost", "postgres", "postgres");
+module.exports = DataBase;
