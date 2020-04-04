@@ -5,8 +5,12 @@ class BotMessageFilter {
     }
 
     filter(msg) {
-        if (msg.channel.id !== this.config.botChannelID) {
-            this.filterDelete(msg);
+        if (this.config.hasOwnProperty("botChannelID")) {
+            if (msg.channel.id !== this.config.botChannelID) {
+                this.filterDelete(msg);
+            }
+        } else {
+            console.error("botChannelID was not defined in the filterConfig.json file");
         }
     }
 
@@ -32,11 +36,15 @@ class BotMessageFilter {
     messageIsCommand(prefix) {
         let matchingPrefixCount = 0;
 
-        this.config.bots.forEach((bot) => {
-            if (bot.prefix === prefix) {
-                matchingPrefixCount++;
-            }
-        });
+        if (this.config.hasOwnProperty("bots")) {
+            this.config.bots.forEach((bot) => {
+                if (bot.prefix === prefix) {
+                    matchingPrefixCount++;
+                }
+            });
+        } else  {
+            console.error("bot wasn't defined in filterConfig.json file");
+        }
 
         return matchingPrefixCount > 0;
     }
@@ -44,11 +52,15 @@ class BotMessageFilter {
     messageIsFromBot(id) {
         let matchingBotCount = 0;
 
-        this.config.bots.forEach((bot) => {
-            if (bot.id === id) {
-                matchingBotCount++;
-            }
-        });
+        if (this.config.hasOwnProperty("bots")) {
+            this.config.bots.forEach((bot) => {
+                if (bot.id === id) {
+                    matchingBotCount++;
+                }
+            });
+        } else  {
+            console.error("bot wasn't defined in filterConfig.json file");
+        }
 
         return matchingBotCount > 0;
     }
