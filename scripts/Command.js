@@ -30,11 +30,7 @@ class Command {
     }
 
     permissionToRun() {
-        if (this.msg.channel.id === filterconf.botChannelID) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.msg.channel.id === filterconf.botChannelID;
     }
 }
 

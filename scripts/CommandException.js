@@ -1,7 +1,8 @@
 class CommandException extends Error{
 
     constructor(message) {
-        super(message);
+        super();
+        this.message = message;
         this.name = "CommandException";
     }
 }

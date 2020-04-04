@@ -19,7 +19,7 @@ class BotMessageFilter {
             msg.channel.send('please send Commands into the Botchannel')
                 .then(message => {
                     msg.delete()
-                        .catch(console.log)
+                        .catch(console.log);
 
                     setTimeout(() => {
                         message.delete()

@@ -9,7 +9,7 @@ class ErrorHandler {
                             .catch(console.log)
                     }, 10000)
                 })
-        }
+        };
 
         this.CommandException = (err, msg, cmd) => {
             msg.channel.send(err.message)
@@ -19,7 +19,7 @@ class ErrorHandler {
                             .catch(console.log)
                     }, 10000)
                 })
-        }
+        };
 
         this.Error = (err, msg, cmd) => {
             console.log(err.message);

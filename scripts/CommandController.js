@@ -20,20 +20,6 @@ class CommandController {
                 msg.channel.send(text);
             }
         }
-
-        this.binaryPotato = {
-            parameter: {
-                min: 1,
-                max: 1
-            },
-            command: (msg, parameter) => {
-                DataBase.instance.doSQL("CREATE TABLE bpMember (" +
-                    "discord_id VARCHAR(20)," +
-                    "whitelist_name VARCHAR(20)," +
-                    "CONSTRAINT PK_bpMember PRIMARY KEY (discord_id)" +
-                    ")")
-            }
-        }
     }
 
     convertToCommand(msg, commandString) {
