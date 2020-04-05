@@ -18,9 +18,9 @@ export class ImploBot {
 
     run() {
         this.initializeCommands();
-        this.bot.connect().catch(console.log);
 
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
+            this.bot.connect().catch(reject);
             this.bot.on("ready", () => {
                 console.log("connected");
                 resolve();
