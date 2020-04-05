@@ -3,7 +3,7 @@ import {Message} from "eris";
 
 const filterConf = require("../../config/filterConf.json");
 
-export class BotChannelAuthorFilter extends Filter{
+export class BotChannelCommand extends Filter{
     constructor() {
         super("f");
     }
