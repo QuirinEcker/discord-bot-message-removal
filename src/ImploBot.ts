@@ -37,7 +37,11 @@ export class ImploBot {
     }
 
     private initializeCommand(command: Command) {
-        this.bot.registerCommand(command.name, command.execute)
+        this.bot.registerCommand(
+            command.name,
+            (msg, args) =>
+                command.execute(msg, args)
+        );
     }
 
     private initializeFilters() {
@@ -45,6 +49,6 @@ export class ImploBot {
     }
 
     private initializeFilter(filter: BotChannelFilter) {
-        this.bot.on("messageCreate", filter.filter);
+        this.bot.on("messageCreate", msg => filter.filter(msg));
     }
 }
