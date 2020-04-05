@@ -1,6 +1,7 @@
 import {CommandClient} from "eris";
 import {Command} from "./commands/Command";
 import {Echo} from "./commands/Echo";
+import {BotChannelFilter} from "./filters/BotChannelFilter";
 const Config = require("../config/config.json");
 
 export class ImploBot {
@@ -20,6 +21,7 @@ export class ImploBot {
 
     public run() {
         this.initializeCommands();
+        this.initializeFilters();
 
         return new Promise((resolve, reject) => {
             this.bot.connect().catch(reject);
@@ -36,5 +38,13 @@ export class ImploBot {
 
     private initializeCommand(command: Command) {
         this.bot.registerCommand(command.name, command.execute)
+    }
+
+    private initializeFilters() {
+        this.initializeFilter(new BotChannelFilter())
+    }
+
+    private initializeFilter(filter: BotChannelFilter) {
+        this.bot.on("messageCreate", filter.filter);
     }
 }

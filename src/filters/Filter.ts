@@ -2,9 +2,9 @@ export abstract class Filter {
 
     protected abstract check(msg): boolean;
 
-    public async filter(msg): Promise<void> {
+    public filter(msg) {
         if (this.check(msg)) {
-            await msg.delete();
+            msg.delete();
         }
     }
 }
