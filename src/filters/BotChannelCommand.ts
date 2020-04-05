@@ -5,7 +5,7 @@ const filterConf = require("../../config/filterConf.json");
 
 export class BotChannelCommand extends Filter{
     constructor() {
-        super("f");
+        super(`Bot Commands belong in the bot channel ${filterConf.botChannelID}`);
     }
 
     protected check(msg: Message): boolean {
