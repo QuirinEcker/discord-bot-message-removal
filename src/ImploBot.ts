@@ -16,7 +16,7 @@ export class ImploBot {
         );
     }
 
-    run() {
+    public run() {
         this.initializeCommands();
 
         return new Promise((resolve, reject) => {
