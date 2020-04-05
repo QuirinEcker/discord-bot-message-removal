@@ -31,21 +31,14 @@ export class ImploBot {
     }
 
     private initializeCommands() {
-        this.initializeCommand("echo", new Echo(), 1, Number.MAX_SAFE_INTEGER);
+        this.initializeCommand(new Echo());
     }
 
     private initializeCommand(
-        name : string,
-        command : Command,
-        minParam : number,
-        maxParam : number
+        command: Command
     ) {
-        this.bot.registerCommand(name, (msg, args) => {
-            if (args.length >= minParam && args.length <= maxParam) {
-                command.execute(msg, args);
-            } else {
-                console.log("Invalid Arguments");
-            }
+        this.bot.registerCommand(command.name, (msg, args) => {
+            command.execute(msg, args);
         })
     }
 }

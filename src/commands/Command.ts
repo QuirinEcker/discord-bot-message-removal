@@ -3,7 +3,7 @@ import { Message } from "eris";
 export abstract class Command {
     protected minArguments: number;
     protected maxArguments: number;
-    protected name: string;
+    name: string;
 
     protected constructor(name: string, minimumNumberOfArguments: number, maximumNumberOfArguments: number) {
         this.name = name;
