@@ -37,8 +37,6 @@ export class ImploBot {
     private initializeCommand(
         command: Command
     ) {
-        this.bot.registerCommand(command.name, (msg, args) => {
-            command.execute(msg, args);
-        })
+        this.bot.registerCommand(command.name, command.execute)
     }
 }
