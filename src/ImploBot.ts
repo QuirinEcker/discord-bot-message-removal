@@ -49,6 +49,6 @@ export class ImploBot {
     }
 
     private initializeFilter(filter: BotChannelFilter) {
-        this.bot.on("messageCreate", msg => filter.filter(msg));
+        this.bot.on("messageCreate", msg => filter.execute(msg));
     }
 }
