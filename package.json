@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "dependencies": {
     "discord.js": "latest",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "tsc-watch": "^4.2.3"
   }
 }
