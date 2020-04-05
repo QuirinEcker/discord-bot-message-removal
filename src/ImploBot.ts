@@ -34,9 +34,7 @@ export class ImploBot {
         this.initializeCommand(new Echo());
     }
 
-    private initializeCommand(
-        command: Command
-    ) {
+    private initializeCommand(command: Command) {
         this.bot.registerCommand(command.name, command.execute)
     }
 }
