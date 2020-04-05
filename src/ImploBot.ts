@@ -14,7 +14,7 @@ export class ImploBot {
         this.bot = new CommandClient(
             Config.token,
             {},
-            {prefix: "§"}
+            {prefix: "."}
         );
     }
 
