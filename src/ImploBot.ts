@@ -29,6 +29,12 @@ export class ImploBot {
     }
 
     private initializeCommands() {
+        this.bot.registerCommand("echo", (msg, args) => {
+            if (args.length === 0) {
+                return "Invalid input"
+            }
 
+            return args.join(" ");
+        })
     }
 }
