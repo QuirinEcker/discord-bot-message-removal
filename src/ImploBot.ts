@@ -36,16 +36,16 @@ export class ImploBot {
         this.initializeCommand(new Echo());
     }
 
+    private initializeFilters() {
+        this.initializeFilter(new BotChannelFilter())
+    }
+
     private initializeCommand(command: Command) {
         this.bot.registerCommand(
             command.name,
             (msg, args) =>
                 command.execute(msg, args)
         );
-    }
-
-    private initializeFilters() {
-        this.initializeFilter(new BotChannelFilter())
     }
 
     private initializeFilter(filter: BotChannelFilter) {
