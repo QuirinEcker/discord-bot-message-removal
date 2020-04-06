@@ -1,4 +1,4 @@
-const filterconf = require("../config/filterConf");
+const filterconf = require("../config/ServerConfigs");
 const CommandException = require("./CommandException");
 
 class Command {

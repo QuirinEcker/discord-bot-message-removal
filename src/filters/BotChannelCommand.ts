@@ -1,7 +1,7 @@
 import {Filter} from "./Filter";
 import {Message, TextChannel} from "eris";
 
-const filterConf = require("../../config/filterConf.json");
+const filterConf = require("../../config/ServerConfigs.json");
 const config = require("../../config/config.json");
 
 export class BotChannelCommand extends Filter{
