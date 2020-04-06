@@ -23,11 +23,9 @@ export class CommandFilter extends Filter{
         }
     }
 
-    protected toResponse(msg: Message) {
+    protected toResponse(msg: Message): string {
         if (msg.channel instanceof TextChannel) {
-            msg.channel.createMessage(
-                `Bot Commands belong in the <#${filterConf[msg.channel.guild.id].botChannelID}>`
-            ).catch(console.log);
+            return `Bot Commands belong in the <#${filterConf[msg.channel.guild.id].botChannelID}>`
         }
     }
 }

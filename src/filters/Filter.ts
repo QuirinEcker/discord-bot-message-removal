@@ -19,7 +19,7 @@ export abstract class Filter {
         }
     }
 
-    protected toResponse(msg: Message) {
+    protected toResponse(msg: Message): string {
         return "Message got filtered";
     }
 
