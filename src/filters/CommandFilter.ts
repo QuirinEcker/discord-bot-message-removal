@@ -23,7 +23,7 @@ export class CommandFilter extends Filter{
         }
     }
 
-    protected sendRespond(msg: Message) {
+    protected toResponse(msg: Message) {
         if (msg.channel instanceof TextChannel) {
             msg.channel.createMessage(
                 `Bot Commands belong in the <#${filterConf[msg.channel.guild.id].botChannelID}>`

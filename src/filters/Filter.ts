@@ -14,13 +14,17 @@ export abstract class Filter {
             msg.delete()
                 .catch(console.log);
             if (this.responseEnabled === true) {
-                this.sendRespond(msg)
+                this.sendResponse(msg)
             }
         }
     }
 
-    protected sendRespond(msg: Message) {
-        msg.channel.createMessage("Message got filtered")
-            .catch(console.log);
+    protected toResponse(msg: Message) {
+        return "Message got filtered";
+    }
+
+    private sendResponse(msg: Message) {
+        msg.channel.createMessage(this.toResponse(msg))
+            .catch(console.log)
     }
 }
