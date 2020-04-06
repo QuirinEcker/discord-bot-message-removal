@@ -3,8 +3,8 @@ import {Message} from "eris";
 export abstract class Filter {
     protected responseEnabled;
 
-    constructor() {
-        this.responseEnabled = true;
+    constructor(responseEnabled: boolean = true) {
+        this.responseEnabled = responseEnabled;
     }
 
     protected abstract check(msg: Message): boolean;

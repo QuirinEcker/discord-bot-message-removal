@@ -7,8 +7,7 @@ const config = require("../../config/config.json");
 export class BotChannelCommand extends Filter{
 
     constructor() {
-        super();
-        this.responseEnabled = true;
+        super(true);
     }
 
     protected check(msg: Message): boolean {
