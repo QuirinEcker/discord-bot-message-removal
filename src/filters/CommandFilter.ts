@@ -9,7 +9,7 @@ export class CommandFilter extends Filter{
     }
 
     protected filterCheck(msg: Message): boolean {
-        return false;
+        return true;
     }
 
     protected sendRespond(msg: Message) {
