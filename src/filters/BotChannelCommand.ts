@@ -22,4 +22,12 @@ export class BotChannelCommand extends Filter{
             return true;
         }
     }
+
+    protected sendRespond(msg: Message) {
+        if (msg.channel instanceof TextChannel) {
+            msg.channel.createMessage(
+                `Bot Commands belong in the <#${filterConf[msg.channel.guild.id].botChannelID}>`
+            ).catch(console.log);
+        }
+    }
 }
