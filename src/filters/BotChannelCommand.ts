@@ -6,6 +6,11 @@ const config = require("../../config/config.json");
 
 export class BotChannelCommand extends Filter{
 
+    constructor() {
+        super();
+        this.responseEnabled = true;
+    }
+
     protected check(msg: Message): boolean {
         if (msg.channel instanceof TextChannel) {
             const sessionFilterConf = filterConf[msg.channel.guild.id];
