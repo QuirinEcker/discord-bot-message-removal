@@ -14,9 +14,8 @@ export class CommandFilter extends Filter{
             const sessionConfig = filterConf[msg.channel.guild.id];
             return sessionConfig.bots.includes(
                 sessionConfig.bots.filter(
-                    bot => bot.prefix = msg.content.charAt(0)
-                )
-            );
+                    bot => bot.prefix === msg.content.charAt(0)
+                )[0]);
         } else {
             msg.channel.createMessage(`This should not have happened. Please report to <@${config.maintainer}>`)
                 .catch(console.log);
