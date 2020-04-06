@@ -7,7 +7,7 @@ const config = require("../../config/config.json");
 export class BotFilter extends Filter{
 
     constructor() {
-        super(true);
+        super(false);
     }
 
     protected filterCheck(msg: Message): boolean {
@@ -28,14 +28,6 @@ export class BotFilter extends Filter{
             msg.channel.createMessage(`This should not have happened. Please report to <@${config.maintainer}>`)
                 .catch(console.log);
             return true;
-        }
-    }
-
-    protected sendRespond(msg: Message) {
-        if (msg.channel instanceof TextChannel) {
-            msg.channel.createMessage(
-                `Bot Commands belong in the <#${filterConf[msg.channel.guild.id].botChannelID}>`
-            ).catch(console.log);
         }
     }
 }
