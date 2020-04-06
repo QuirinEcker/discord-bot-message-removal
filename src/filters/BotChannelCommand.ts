@@ -13,7 +13,7 @@ export class BotChannelCommand extends Filter{
     protected filterCheck(msg: Message): boolean {
         if (msg.channel instanceof TextChannel) {
             const sessionFilterConf = filterConf[msg.channel.guild.id];
-            const notInWhiteListChannel = sessionFilterConf.botWhiteList.includes(
+            const notInWhiteListChannel = !sessionFilterConf.botWhiteList.includes(
                 sessionFilterConf.botWhiteList.filter(
                     channel => msg.channel.id === channel
                 )[0]);
