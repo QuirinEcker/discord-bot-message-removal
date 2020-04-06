@@ -10,16 +10,20 @@ export class BotChannelCommand extends Filter{
         super(true);
     }
 
-    protected check(msg: Message): boolean {
+    protected filterCheck(msg: Message): boolean {
         if (msg.channel instanceof TextChannel) {
             const sessionFilterConf = filterConf[msg.channel.guild.id];
+            const notInWhiteListChannel = sessionFilterConf.botWhiteList.includes(
+                sessionFilterConf.botWhiteList.filter(
+                    channel => msg.channel.id === channel
+                )[0]);
 
-            return msg.channel.id !== sessionFilterConf.botChannelID
-                && sessionFilterConf.bots.includes(
-                    sessionFilterConf.bots.filter(
-                        bot => msg.author.id === bot.id
-                    )[0]
-                );
+            const isBot = sessionFilterConf.bots.includes(
+                sessionFilterConf.bots.filter(
+                    bot => msg.author.id === bot.id
+                )[0]);
+
+            return isBot && notInWhiteListChannel;
         } else {
             msg.channel.createMessage(`This should not have happened. Please report to <@${config.maintainer}>`)
                 .catch(console.log);
