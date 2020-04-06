@@ -3,7 +3,7 @@ import {Message} from "eris";
 export abstract class Filter {
     protected respond: string;
 
-    constructor(respnd: string) {
+    protected constructor(respnd: string) {
         this.respond = respnd;
     }
 
