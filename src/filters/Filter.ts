@@ -1,10 +1,18 @@
 import {Message} from "eris";
 
 export abstract class Filter {
-    protected responseEnabled;
+    private responseEnabled;
+    private responseDeletion;
+    private responseDeletionTime;
 
-    constructor(responseEnabled: boolean = true) {
+    constructor(
+        responseEnabled: boolean = true,
+        responseDeletion: boolean = true,
+        responseDeletionTime: number = 5000
+    ) {
         this.responseEnabled = responseEnabled;
+        this.responseDeletion = responseDeletion;
+        this.responseDeletionTime = responseDeletionTime;
     }
 
     protected abstract filterCheck(msg: Message): boolean;
@@ -25,9 +33,13 @@ export abstract class Filter {
 
     private sendResponse(msg: Message): void {
         msg.channel.createMessage(this.toResponse(msg))
-            .then(message => setTimeout(() => {
-                message.delete()
-                    .catch(console.log)
-            }, 1000))
+            .then(message => {
+                if (this.responseDeletion === true) {
+                    setTimeout(() => {
+                        message.delete()
+                            .catch(console.log)
+                    }, this.responseDeletionTime)
+                }
+            })
     }
 }
