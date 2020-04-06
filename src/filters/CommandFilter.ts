@@ -1,7 +1,8 @@
 import {Filter} from "./Filter";
 import {Message, TextChannel} from "eris";
 
-const filterConf = require("../../ServerConfigs.json");
+const filterConf = require("../../config/ServerConfigs.json");
+const config = require("../../config/config.json");
 
 export class CommandFilter extends Filter{
     constructor() {
@@ -9,7 +10,18 @@ export class CommandFilter extends Filter{
     }
 
     protected filterCheck(msg: Message): boolean {
-        return true;
+        if (msg.channel instanceof TextChannel) {
+            const sessionConfig = filterConf[msg.channel.guild.id];
+            return sessionConfig.bots.includes(
+                sessionConfig.bots.filter(
+                    bot => bot.prefix = msg.content.charAt(0)
+                )
+            );
+        } else {
+            msg.channel.createMessage(`This should not have happened. Please report to <@${config.maintainer}>`)
+                .catch(console.log);
+            return true;
+        }
     }
 
     protected sendRespond(msg: Message) {
