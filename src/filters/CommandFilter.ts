@@ -12,10 +12,17 @@ export class CommandFilter extends Filter{
     protected filterCheck(msg: Message): boolean {
         if (msg.channel instanceof TextChannel) {
             const sessionConfig = filterConf[msg.channel.guild.id];
-            return sessionConfig.bots.includes(
+            const notInWhiteListChannel = !sessionConfig.botWhiteList.includes(
+                sessionConfig.botWhiteList.filter(
+                    channel => msg.channel.id === channel
+                )[0]);
+
+            const isCommand = sessionConfig.bots.includes(
                 sessionConfig.bots.filter(
                     bot => bot.prefix === msg.content.charAt(0)
                 )[0]);
+
+            return isCommand && notInWhiteListChannel;
         } else {
             msg.channel.createMessage(`This should not have happened. Please report to <@${config.maintainer}>`)
                 .catch(console.log);
