@@ -1,19 +1,28 @@
 import {Filter} from "./Filter";
-import {Message} from "eris";
+import {Message, TextChannel} from "eris";
 
 const filterConf = require("../../config/filterConf.json");
+const config = require("../../config/config.json");
 
 export class BotChannelCommand extends Filter{
     constructor() {
-        super(`Bot Commands belong in the bot channel #${filterConf.botChannelID}`);
+        super(`Bot Commands belong in the bot channel <#${filterConf.botChannelID}>`);
     }
 
     protected check(msg: Message): boolean {
-        return msg.channel.id !== filterConf.botChannelID
-            && filterConf.bots.includes(
-                filterConf.bots.filter(
-                    bot => msg.author.id === bot.id
-                )[0]
-            );
+        if (msg.channel instanceof TextChannel) {
+            const sessionFilterConf = filterConf[msg.channel.guild.id];
+
+            return msg.channel.id !== sessionFilterConf.botChannelID
+                && sessionFilterConf.bots.includes(
+                    sessionFilterConf.bots.filter(
+                        bot => msg.author.id === bot.id
+                    )[0]
+                );
+        } else {
+            msg.channel.createMessage(`This should not have happened. Please report to <@${config.maintainer}>`)
+                .catch(console.log);
+            return true;
+        }
     }
 }
