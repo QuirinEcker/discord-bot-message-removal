@@ -7,10 +7,10 @@ export abstract class Filter {
         this.responseEnabled = responseEnabled;
     }
 
-    protected abstract check(msg: Message): boolean;
+    protected abstract filterCheck(msg: Message): boolean;
 
     public execute(msg: Message) {
-        if (this.check(msg)) {
+        if (this.filterCheck(msg)) {
             msg.delete()
                 .catch(console.log);
             if (this.responseEnabled === true) {
