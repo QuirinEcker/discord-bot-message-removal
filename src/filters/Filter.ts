@@ -1,11 +1,11 @@
 import {Message} from "eris";
 
 export abstract class Filter {
-    private responseEnabled;
-    private responseDeletion;
-    private responseDeletionTime;
+    private readonly responseEnabled;
+    private readonly responseDeletion;
+    private readonly responseDeletionTime;
 
-    constructor(
+    protected constructor(
         responseEnabled: boolean = true,
         responseDeletion: boolean = true,
         responseDeletionTime: number = 5000
