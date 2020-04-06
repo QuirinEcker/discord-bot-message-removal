@@ -23,8 +23,11 @@ export abstract class Filter {
         return "Message got filtered";
     }
 
-    private sendResponse(msg: Message) {
+    private sendResponse(msg: Message): void {
         msg.channel.createMessage(this.toResponse(msg))
-            .catch(console.log)
+            .then(message => setTimeout(() => {
+                message.delete()
+                    .catch(console.log)
+            }, 1000))
     }
 }
