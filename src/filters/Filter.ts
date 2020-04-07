@@ -4,6 +4,7 @@ export abstract class Filter {
     private readonly responseEnabled;
     private readonly responseDeletion;
     private readonly responseDeletionTime;
+    private static responses = new Array<Promise<string>>();
 
     protected constructor(
         responseEnabled: boolean = true,
@@ -19,10 +20,12 @@ export abstract class Filter {
 
     public execute(msg: Message) {
         if (this.filterCheck(msg)) {
-            msg.delete()
-                .catch(console.log);
+            if (!this.responsesIncludeMessage(msg.id)) {
+                msg.delete()
+                    .catch(console.log);
+            }
             if (this.responseEnabled === true) {
-                this.sendResponse(msg)
+                Filter.responses.push(this.sendResponse(msg));
             }
         }
     }
@@ -31,8 +34,8 @@ export abstract class Filter {
         return "Message got filtered";
     }
 
-    private sendResponse(msg: Message): void {
-        msg.channel.createMessage(this.toResponse(msg))
+    private sendResponse(msg: Message): Promise<string> {
+        return msg.channel.createMessage(this.toResponse(msg))
             .then(message => {
                 if (this.responseDeletion === true) {
                     setTimeout(() => {
@@ -40,6 +43,17 @@ export abstract class Filter {
                             .catch(console.log)
                     }, this.responseDeletionTime)
                 }
+
+                return message.id;
             })
+    }
+
+    private responsesIncludeMessage(id: string): boolean {
+        const filterResult: Array<Promise<string>> = Filter.responses.filter(async promise => {
+            const messageId: string = await promise;
+            return id === messageId;
+        });
+
+        return filterResult.length > 0;
     }
 }
