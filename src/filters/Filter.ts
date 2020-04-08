@@ -4,7 +4,7 @@ export abstract class Filter {
     private readonly responseEnabled;
     private readonly responseDeletion;
     private readonly responseDeletionTime;
-    private static messageWhiteList = new Array<Promise<string>>();
+    private static messageWhiteList = new Array<Promise<Message>>();
 
     protected constructor(
         responseEnabled: boolean = true,
@@ -38,7 +38,7 @@ export abstract class Filter {
         return "Message got filtered";
     }
 
-    private sendResponse(msg: Message): Promise<string> {
+    private sendResponse(msg: Message): Promise<Message> {
         return msg.channel.createMessage(this.toResponse(msg))
             .then(message => {
                 if (this.responseDeletion === true) {
@@ -48,26 +48,25 @@ export abstract class Filter {
                     }, this.responseDeletionTime)
                 }
 
-                return message.id;
+                return message;
             })
     }
 
     private responsesIncludeMessageID(id: string): boolean {
-        const filterResult: Array<Promise<string>> = Filter.messageWhiteList.filter(async promise => {
-            const messageId: string = await promise;
-            return id === messageId;
+        const filterResult: Array<Promise<Message>> = Filter.messageWhiteList.filter(async promise => {
+            const message: Message = await promise;
+            return id === message.id;
         });
 
         return filterResult.length > 0;
     }
 
-    private deletePromiseWithSameMessageID(id: string) {
-        const filterResult: Array<Promise<string>> = Filter.messageWhiteList.filter(async promise => {
-            const messageId: string = await promise;
-            return id === messageId;
+    private deletePromiseWithSameMessageID(id: string): void {
+        const filterResult: Array<Promise<Message>> = Filter.messageWhiteList.filter(async promise => {
+            const message: Message = await promise;
+            return id === message.id;
         });
 
         Filter.messageWhiteList.splice(Filter.messageWhiteList.indexOf(filterResult[0]), 1);
-
     }
 }
