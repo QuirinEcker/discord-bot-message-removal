@@ -20,9 +20,13 @@ export abstract class Filter {
 
     public execute(msg: Message) {
         if (this.filterCheck(msg)) {
-            if (!this.responsesIncludeMessage(msg.id)) {
+            if (!this.responsesIncludeMessageID(msg.id)) {
                 msg.delete()
                     .catch(console.log);
+            } else {
+                if (this.responseEnabled === true) {
+                    this.deletePromiseWithSameMessageID(msg.id)
+                }
             }
             if (this.responseEnabled === true) {
                 Filter.responses.push(this.sendResponse(msg));
@@ -48,12 +52,22 @@ export abstract class Filter {
             })
     }
 
-    private responsesIncludeMessage(id: string): boolean {
+    private responsesIncludeMessageID(id: string): boolean {
         const filterResult: Array<Promise<string>> = Filter.responses.filter(async promise => {
             const messageId: string = await promise;
             return id === messageId;
         });
 
         return filterResult.length > 0;
+    }
+
+    private deletePromiseWithSameMessageID(id: string) {
+        const filterResult: Array<Promise<string>> = Filter.responses.filter(async promise => {
+            const messageId: string = await promise;
+            return id === messageId;
+        });
+
+        Filter.responses.splice(Filter.responses.indexOf(filterResult[0]), 1);
+
     }
 }
