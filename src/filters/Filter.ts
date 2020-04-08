@@ -4,7 +4,7 @@ export abstract class Filter {
     private readonly responseEnabled;
     private readonly responseDeletion;
     private readonly responseDeletionTime;
-    private static responses = new Array<Promise<string>>();
+    private static messageWhiteList = new Array<Promise<string>>();
 
     protected constructor(
         responseEnabled: boolean = true,
@@ -29,7 +29,7 @@ export abstract class Filter {
                 }
             }
             if (this.responseEnabled === true) {
-                Filter.responses.push(this.sendResponse(msg));
+                Filter.messageWhiteList.push(this.sendResponse(msg));
             }
         }
     }
@@ -53,7 +53,7 @@ export abstract class Filter {
     }
 
     private responsesIncludeMessageID(id: string): boolean {
-        const filterResult: Array<Promise<string>> = Filter.responses.filter(async promise => {
+        const filterResult: Array<Promise<string>> = Filter.messageWhiteList.filter(async promise => {
             const messageId: string = await promise;
             return id === messageId;
         });
@@ -62,12 +62,12 @@ export abstract class Filter {
     }
 
     private deletePromiseWithSameMessageID(id: string) {
-        const filterResult: Array<Promise<string>> = Filter.responses.filter(async promise => {
+        const filterResult: Array<Promise<string>> = Filter.messageWhiteList.filter(async promise => {
             const messageId: string = await promise;
             return id === messageId;
         });
 
-        Filter.responses.splice(Filter.responses.indexOf(filterResult[0]), 1);
+        Filter.messageWhiteList.splice(Filter.messageWhiteList.indexOf(filterResult[0]), 1);
 
     }
 }
