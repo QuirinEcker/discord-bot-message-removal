@@ -3,7 +3,7 @@
 mkdir config
 cd ./config || exit
 touch config.json
-touch filterConf.json
+touch ServerConfigs.json
 
 echo '
 {
@@ -22,5 +22,5 @@ echo '
     }
   ]
 }
-' > filterConf.json
+' > ServerConfigs.json
 
