@@ -53,15 +53,13 @@ export abstract class Filter {
     }
 
     private static async responsesIncludeMessageID(id: string): Promise<boolean> {
-        let count = 0;
-
         for (const messagePromise of Filter.messageWhiteList) {
             const message: Message = await messagePromise;
             console.log(message.id === id);
-            if (message.id === id) count++;
+            if (message.id === id) return true;
         }
 
-        return count > 0;
+        return false;
     }
 
     private static deletePromiseWithSameMessageID(id: string): void {
