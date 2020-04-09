@@ -24,9 +24,8 @@ export abstract class Filter {
                 msg.delete()
                     .catch(console.log);
             } else {
-                if (this.responseEnabled === true) {
-                    Filter.deletePromiseWithSameMessageID(msg.id)
-                }
+                Filter.deletePromiseWithSameMessageID(msg.id)
+                    .catch(console.log)
             }
             if (this.responseEnabled === true) {
                 Filter.messageWhiteList.push(this.sendResponse(msg));
@@ -53,21 +52,24 @@ export abstract class Filter {
     }
 
     private static async responsesIncludeMessageID(id: string): Promise<boolean> {
+        //console.log(this.messageWhiteList.length);
         for (const messagePromise of Filter.messageWhiteList) {
             const message: Message = await messagePromise;
-            console.log(message.id === id);
             if (message.id === id) return true;
         }
 
         return false;
     }
 
-    private static deletePromiseWithSameMessageID(id: string): void {
-        const filterResult: Array<Promise<Message>> = Filter.messageWhiteList.filter(async promise => {
-            const message: Message = await promise;
-            return id === message.id;
-        });
-
-        Filter.messageWhiteList.splice(Filter.messageWhiteList.indexOf(filterResult[0]), 1);
+    private static async deletePromiseWithSameMessageID(id: string): Promise<void> {
+        let i = 0;
+        for (const messagePromise of Filter.messageWhiteList) {
+            const message: Message = await messagePromise;
+            if (message.id === id){
+                Filter.messageWhiteList.splice(i, 1);
+                console.log("message deleted with id " + i);
+            }
+            i++;
+        }
     }
 }
