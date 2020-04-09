@@ -67,7 +67,6 @@ export abstract class Filter {
             const message: Message = await messagePromise;
             if (message.id === id){
                 Filter.messageWhiteList.splice(i, 1);
-                console.log("message deleted with id " + i);
             }
             i++;
         }
