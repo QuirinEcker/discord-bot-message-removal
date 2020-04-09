@@ -52,7 +52,6 @@ export abstract class Filter {
     }
 
     private static async responsesIncludeMessageID(id: string): Promise<boolean> {
-        //console.log(this.messageWhiteList.length);
         for (const messagePromise of Filter.messageWhiteList) {
             const message: Message = await messagePromise;
             if (message.id === id) return true;
