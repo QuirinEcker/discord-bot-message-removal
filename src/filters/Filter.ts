@@ -18,14 +18,14 @@ export abstract class Filter {
 
     protected abstract filterCheck(msg: Message): boolean;
 
-    public execute(msg: Message) {
+    public async execute(msg: Message) {
         if (this.filterCheck(msg)) {
-            if (!this.responsesIncludeMessageID(msg.id)) {
+            if (! await Filter.responsesIncludeMessageID(msg.id)) {
                 msg.delete()
                     .catch(console.log);
             } else {
                 if (this.responseEnabled === true) {
-                    this.deletePromiseWithSameMessageID(msg.id)
+                    Filter.deletePromiseWithSameMessageID(msg.id)
                 }
             }
             if (this.responseEnabled === true) {
@@ -39,29 +39,22 @@ export abstract class Filter {
     }
 
     private sendResponse(msg: Message): Promise<Message> {
-        return msg.channel.createMessage(this.toResponse(msg))
-            .then(message => {
-                if (this.responseDeletion === true) {
-                    setTimeout(() => {
-                        message.delete()
-                            .catch(console.log)
-                    }, this.responseDeletionTime)
-                }
-
-                return message;
-            })
+        return msg.channel.createMessage(this.toResponse(msg));
     }
 
-    private responsesIncludeMessageID(id: string): boolean {
-        const filterResult: Array<Promise<Message>> = Filter.messageWhiteList.filter(async promise => {
-            const message: Message = await promise;
-            return id === message.id;
-        });
+    private static async responsesIncludeMessageID(id: string): Promise<boolean> {
+        let count = 0;
 
-        return filterResult.length > 0;
+        for (const messagePromise of Filter.messageWhiteList) {
+            const message: Message = await messagePromise;
+            console.log(message.id === id);
+            if (message.id === id) count++;
+        }
+
+        return count > 0;
     }
 
-    private deletePromiseWithSameMessageID(id: string): void {
+    private static deletePromiseWithSameMessageID(id: string): void {
         const filterResult: Array<Promise<Message>> = Filter.messageWhiteList.filter(async promise => {
             const message: Message = await promise;
             return id === message.id;
