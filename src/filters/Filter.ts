@@ -39,7 +39,17 @@ export abstract class Filter {
     }
 
     private sendResponse(msg: Message): Promise<Message> {
-        return msg.channel.createMessage(this.toResponse(msg));
+        return msg.channel.createMessage(this.toResponse(msg))
+            .then(message => {
+                if (this.responseDeletion === true) {
+                    setTimeout(() => {
+                        message.delete()
+                            .then(console.log);
+                    }, this.responseDeletionTime)
+                }
+
+                return message;
+            });
     }
 
     private static async responsesIncludeMessageID(id: string): Promise<boolean> {
