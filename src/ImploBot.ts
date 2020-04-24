@@ -4,6 +4,7 @@ import {Echo} from "./commands/Echo";
 import {BotFilter} from "./filters/BotFilter";
 import {CommandFilter} from "./filters/CommandFilter";
 import {Filter} from "./filters/Filter";
+import {AppleSauceFilter} from "./filters/AppleSauceFilter";
 const Config = require("../config/config.json");
 
 export class ImploBot {
@@ -41,6 +42,7 @@ export class ImploBot {
     private initializeFilters() {
         this.initializeFilter(new BotFilter());
         this.initializeFilter(new CommandFilter());
+        this.initializeFilter(new AppleSauceFilter());
     }
 
     private initializeCommand(command: Command) {

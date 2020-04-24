@@ -6,7 +6,7 @@ export abstract class Filter {
     private readonly responseDeletionTime;
     private static messageWhiteList = new Array<Promise<Message>>();
 
-    protected constructor(
+    constructor(
         responseEnabled: boolean = true,
         responseDeletion: boolean = true,
         responseDeletionTime: number = 5000
