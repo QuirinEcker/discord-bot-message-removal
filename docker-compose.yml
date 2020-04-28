@@ -1,0 +1,8 @@
+version: '3.7'
+
+services:
+  node:
+    build: .
+    container_name: implobot_node
+    volumes:
+      - ./:/usr/src/app/
