@@ -2,7 +2,7 @@
   "name": "discord-bot-message-removal",
   "version": "1.0.0",
   "scripts": {
-    "app": "tsc-watch --onSuccess 'node ./dist/index.js'",
+    "app": "tsc-watch --onSuccess 'node --inspect=0.0.0.0:9229 ./dist/index.js'",
     "docker": "docker-compose up -d --build"
   },
   "dependencies": {
