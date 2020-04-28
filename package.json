@@ -2,8 +2,8 @@
   "name": "discord-bot-message-removal",
   "version": "1.0.0",
   "scripts": {
-    "debug": "tsc-watch --onSuccess 'node ./dist/index.js'",
-    "start-docker": "docker-compose up -d --build"
+    "app": "tsc-watch --onSuccess 'node ./dist/index.js'",
+    "docker": "docker-compose up -d --build"
   },
   "dependencies": {
     "@types/node": "^13.13.4",

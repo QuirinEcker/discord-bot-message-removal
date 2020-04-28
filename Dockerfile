@@ -3,4 +3,4 @@ WORKDIR /usr/src/app
 COPY . .
 RUN ls;
 RUN npm install
-CMD ["npm", "run", "debug"]
+CMD ["npm", "run", "app"]
