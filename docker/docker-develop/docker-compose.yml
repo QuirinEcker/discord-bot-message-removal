@@ -7,4 +7,15 @@ services:
     ports:
     - 9229:9229
     volumes:
-      - ./:/usr/src/app/
+      - ../../:/usr/src/app/
+
+  postgres:
+    image: postgres
+    container_name: implobot_postgres
+    environment:
+      POSTGRES_PASSWORD: root
+    ports:
+    - 5432:5432
+    volumes:
+    - ../../db/:/var/lib/postgresql/data postgres
+
