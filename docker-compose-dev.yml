@@ -6,6 +6,7 @@ services:
       context: .
       dockerfile: docker/node/dev.Dockerfile
     container_name: implobot-node-dev
+    image: implobot/node:dev
     ports:
       - 9229:9229
     volumes:

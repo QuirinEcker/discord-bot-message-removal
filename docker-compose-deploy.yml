@@ -6,6 +6,7 @@ services:
     build:
       context: .
       dockerfile: docker/node/deploy.Dockerfile
+    image: implobot/node:deploy
 
   postgres:
     image: postgres
