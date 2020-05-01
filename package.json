@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "scripts": {
     "app": "tsc-watch --onSuccess 'node --inspect=0.0.0.0:9229 ./dist/index.js'",
-    "docker": "docker-compose up -d --build"
+    "docker-dev": "docker-compose up -d --build",
+    "dokcer-deploy": "docker-compose up -d --build",
+    "tsc-watch": "tsc-watch ./src/index.ts --onSuccess \"node ./dist/index.js\"",
+    "tsc-compile": "tsc ./src/index.ts",
+    "tsc-run": "node ./dist/index.js"
   },
   "dependencies": {
     "@types/node": "^13.13.4",
