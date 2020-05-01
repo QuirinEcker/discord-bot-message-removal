@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+  node:
+    build:
+      context: .
+      dockerfile: docker/node/dev.Dockerfile
+    container_name: implobot-node-dev
+    ports:
+      - 9229:9229
+    volumes:
+      - ./:/usr/src/app/
+
+  postgres:
+    image: postgres
+    container_name: implobot_postgres-dev
+    environment:
+      POSTGRES_PASSWORD: root
+    ports:
+      - 5432:5432
+    volumes:
+      - ../../db/:/var/lib/postgresql/data postgres
+
