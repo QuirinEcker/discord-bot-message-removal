@@ -1,4 +1,5 @@
 FROM node:10
+WORKDIR /usr/src/app
 COPY . .
-RUN npm install && npm run tsc-compile
+RUN npm install
 CMD ["npm", "run", "tsc-run"]
