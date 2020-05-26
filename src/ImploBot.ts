@@ -10,11 +10,8 @@ const Config = require("../config/config.json");
 export class ImploBot {
 
     public bot: CommandClient;
-    private commands;
-
 
     constructor() {
-        this.commands = [];
         this.bot = new CommandClient(
             Config.token,
             {},

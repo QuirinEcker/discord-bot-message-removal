@@ -15,12 +15,12 @@ export class BotFilter extends Filter{
             const sessionFilterConf = filterConf[msg.channel.guild.id];
             const notInWhiteListChannel = !sessionFilterConf.botWhiteList.includes(
                 sessionFilterConf.botWhiteList.filter(
-                    channel => msg.channel.id === channel
+                    (channel: string) => msg.channel.id === channel
                 )[0]);
 
             const isBot = sessionFilterConf.bots.includes(
                 sessionFilterConf.bots.filter(
-                    bot => msg.author.id === bot.id
+                    (bot: any) => msg.author.id === bot.id
                 )[0]);
 
             return isBot && notInWhiteListChannel;

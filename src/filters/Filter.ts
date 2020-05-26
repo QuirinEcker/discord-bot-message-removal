@@ -1,9 +1,9 @@
 import {Message} from "eris";
 
 export abstract class Filter {
-    private readonly responseEnabled;
-    private readonly responseDeletion;
-    private readonly responseDeletionTime;
+    private readonly responseEnabled: boolean;
+    private readonly responseDeletion: boolean;
+    private readonly responseDeletionTime: number;
     private static messageWhiteList = new Array<Promise<Message>>();
 
     constructor(
@@ -27,7 +27,7 @@ export abstract class Filter {
                 Filter.deletePromiseWithSameMessageID(msg.id)
                     .catch(console.log)
             }
-            if (this.responseEnabled === true) {
+            if (this.responseEnabled) {
                 Filter.messageWhiteList.push(this.sendResponse(msg));
             }
         }
@@ -40,7 +40,7 @@ export abstract class Filter {
     private sendResponse(msg: Message): Promise<Message> {
         return msg.channel.createMessage(this.toResponse(msg))
             .then(message => {
-                if (this.responseDeletion === true) {
+                if (this.responseDeletion) {
                     setTimeout(() => {
                         message.delete()
                             .then(console.log);
