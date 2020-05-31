@@ -1,5 +1,5 @@
 {
-  "name": "discord-bot-message-removal",
+  "name": "implobot",
   "version": "1.0.0",
   "scripts": {
     "start-docker-dev": "docker-compose -f docker-compose-dev.yml up -d --build",
@@ -19,5 +19,27 @@
     "ts-node": "^8.9.1",
     "tsc-watch": "^4.2.3",
     "typescript": "^3.8.3"
-  }
+  },
+  "description": "bot for the implodium server https://discord.gg/hmHnb8n",
+  "main": "./src/index.ts",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QuirinEcker/implo-bot.git"
+  },
+  "keywords": [
+    "discord",
+    "github",
+    "bot",
+    "docker",
+    "node",
+    "typescript",
+    "postgres"
+  ],
+  "author": "QuirinEcker",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/QuirinEcker/implo-bot/issues"
+  },
+  "homepage": "https://github.com/QuirinEcker/implo-bot#readme"
 }
