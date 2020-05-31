@@ -5,7 +5,11 @@ export abstract class Command {
     protected maxArguments: number;
     name: string;
 
-    protected constructor(name: string, minimumNumberOfArguments: number, maximumNumberOfArguments: number) {
+    protected constructor(
+        name: string,
+        minimumNumberOfArguments: number,
+        maximumNumberOfArguments: number
+    ) {
         this.name = name;
         this.minArguments = minimumNumberOfArguments;
         this.maxArguments = maximumNumberOfArguments;
