@@ -6,7 +6,7 @@
     "start-docker-deploy": "docker-compose -f docker-compose-deploy.yml up -d --build",
     "stop-docker-dev": "docker-compose -f docker-compose-dev.yml down",
     "stop-docker-deploy": "docker-compose -f docker-compose-deploy.yml down",
-    "tsc-watch": "tsc-watch ./src/index.ts --outDir ./dist --onSuccess \"node --inspect=0.0.0.0:9229 dist/\"",
+    "tsc-watch": "tsc-watch --onSuccess \"node --inspect=0.0.0.0:9229 dist/\"",
     "tsc-compile": "tsc ./src/index.ts --project tsconfig.json",
     "node-run": "node ./dist/index.js",
     "tsc-run": "tsc-watch ./src/index.ts --outDir ./dist --onSuccess \"node dist/\""
