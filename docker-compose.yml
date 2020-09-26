@@ -1,0 +1,9 @@
+version: '2.2'
+
+services:
+  node:
+    container_name: discord-bot-filter
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: discord-bot-filter/node:deploy
