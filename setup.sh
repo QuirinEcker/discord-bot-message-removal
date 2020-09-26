@@ -22,7 +22,11 @@ echo '
       "<Bot ids for bots immune to the filter (right click bot > copy id)>"
     ],
     "bots": [
-      "<Your bots on the server (ids) (right click bot > copy id)>"
+      {
+        "name" : "<name of the bot (optional)>",
+        "id": "<Your bots on the server (ids) (right click bot > copy id)>",
+        "prefix": "<prefix of the bot>"
+      }
     ]
   }
 }
