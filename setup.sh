@@ -1,12 +1,18 @@
 mkdir config
 
-echo '
+echo "Discord Token: "
+read token
+
+tokenConfig='
 {
-  "token": "<insert discord token see discord developer portal>",
+  "token": "@",
   "maintainer": "204674824910405633"
 }
+'
 
-' >> config/config.json
+echo "${tokenConfig/@/$token}" > config/config.json
+
+echo "Please fill out the ServerConfigs"
 
 echo '
 {
@@ -20,6 +26,6 @@ echo '
     ]
   }
 }
-' >> config/ServerConfigs.json
+' > config/ServerConfigs.json
 
 
