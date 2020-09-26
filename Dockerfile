@@ -1,4 +1,4 @@
-FROM node:10
+FROM node:lts-alpine3.9
 WORKDIR /usr/src/app
 CMD ["node", "./dist/index"]
 COPY package*.json ./

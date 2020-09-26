@@ -2,8 +2,8 @@ version: '2.2'
 
 services:
   node:
-    container_name: discord-bot-filter
+    container_name: discord-bot-filter-typescirpt
     build:
       context: .
       dockerfile: Dockerfile
-    image: discord-bot-filter/node:deploy
+    image: implodium/discord-bot-filter-typescript
