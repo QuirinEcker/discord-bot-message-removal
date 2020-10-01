@@ -2,6 +2,7 @@ version: '2.2'
 
 services:
   node:
+    restart: always
     container_name: discord-bot-filter-typescirpt
     build:
       context: .
